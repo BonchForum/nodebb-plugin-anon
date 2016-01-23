@@ -1,0 +1,20 @@
+{
+  "description": "Anon plugin",
+  "url": "https://github.com/BonchForum/nodebb-plugin-anon",
+  "library": "./library.js",
+  "staticDirs": {
+    "static": "./static"
+  },
+  "hooks": [
+    {
+      "hook": "static:app.load", "method": "init"
+    },
+    {
+      "hook": "filter:admin.header.build", "method": "addAdminNavigation"
+    }
+  ],
+  "scripts": [
+    "static/lib/admin.js"
+  ],
+  "templates": "static/templates"
+}
