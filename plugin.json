@@ -11,6 +11,9 @@
     },
     {
       "hook": "filter:admin.header.build", "method": "addAdminNavigation"
+    },
+    {
+      "hook": "filter:topic.create", "method": "filter" 
     }
   ],
   "scripts": [
