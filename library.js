@@ -16,8 +16,9 @@
 
   anon.filter = function(data, callback) {
     winston.info('[nodebb-plugin-anon] ' + data);
+    console.log(data);
 
-    callback(data);
+    callback(null, data);
   }
 
   anon.addAdminNavigation = function(header, callback) {
