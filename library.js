@@ -33,7 +33,7 @@
   anon.filter = function(data, callback) {
     if (settings != null) {
       if (regexPhrase.test(data.content)) {
-        var sign = getSign(data.uid);
+        var sign = getSign(data.uid.toString());
 
         if (existInBanList(sign) && hasAccessCategory(data.cid)) {
           return callback(new Error('[[error:no-privileges]]'))
