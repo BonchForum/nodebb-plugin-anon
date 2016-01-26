@@ -17,7 +17,12 @@
             <input type="text" id="accessCategory" name="accessCategory" title="Access categories" class="form-control" placeholder="1, 2, 3, 4, 5"><br />
           </div>
         </form>
-        <form role="form" class="anon-black">
+        <form role="form" class="anon-addBanList" style="background-color: #FF9F9F">
+          <div class="form-group">
+            <label for="banSignField">Add sign to ban list</label>
+            <input type="text" id="banSignField" name="banSignField" title="Sign" class="form-control" placeholder="abcdef123456789qwerty"><br />
+          </div>
+          <button id="addBanList" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Add</button>
         </form>
       </div>
     </div>
