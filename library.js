@@ -86,7 +86,6 @@
     return new Promise(function(res, err) {
       meta.settings.get('anon', function(err, data) {
         settings = data;
-        console.log(settings);
         res();
       });
     });
@@ -95,8 +94,7 @@
   function loadBanList() {
     return new Promise(function(res, err) {
       meta.settings.get('anon-banlist', function(err, data) {
-        banList = data;
-        console.log(banList);
+        banList = data.signs || [];
         res();
       });
     });

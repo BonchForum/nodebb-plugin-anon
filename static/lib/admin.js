@@ -23,7 +23,7 @@ define('admin/plugins/anon', ['settings'], function(Settings) {
     });
 
     $('#addBanList').on('click', function() {
-      banList.push($('#banSignField').val())
+      banList.signs.push($('#banSignField').val())
       $('#banSignField').val('');
 
       socket.emit('admin.settings.set', {
@@ -57,6 +57,9 @@ define('admin/plugins/anon', ['settings'], function(Settings) {
       }
 
       banList = values;
+      if (banList.sign == null) {
+        banList.signs = new Array();
+      }
     });
   };
 
