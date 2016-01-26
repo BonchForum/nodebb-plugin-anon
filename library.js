@@ -2,9 +2,10 @@
   "use strict";
   var anon = {},
     settings = {},
-    blackList = [],
+    banList = [],
     regexPhrase = /\[\[ANON\]\]/,
     breakLine = '\r\n\r\n',
+    signTitle = '###### sign: ',
     winston = module.parent.require('winston'),
     meta = module.parent.require('./meta'),
     crypto = require('crypto');
@@ -20,13 +21,20 @@
   }
 
   anon.filter = function(data, callback) {
-    if (regexPhrase.test(data.content)) {
-      var sign = getSign(data.uid);
-      data.content = data.content.replace(regexPhrase, '') + breakLine + sign;
-      data.uid = settings.uid;
-    }
+    if (settings != null) {
+      if (regexPhrase.test(data.content)) {
+        var sign = getSign(data.uid);
 
-    callback(null, data);
+        if (existInBanList(sign) && hasAccessCategory(data.cid)) {
+          return callback(new Error('[[error:no-privileges]]'))
+        }
+
+        data.content = data.content.replace(regexPhrase, '') + breakLine + signTitle + sign;
+        data.uid = settings.uid;
+      }
+    }
+    
+    return callback(null, data);
   }
 
   anon.addAdminNavigation = function(header, callback) {
@@ -39,8 +47,13 @@
     callback(null, header);
   }
 
-  function canCreateAnonTopic(sign) {
-    return blackList.indexOf(sign) === -1;
+  function hasAccessCategory(cid) {
+    var accessArrayCategory = settings.accessCategory.splice(', ');
+    return accessArrayCategory.indexOf(cid);
+  }
+
+  function existInBanList(sign) {
+    return banList.indexOf(sign) === -1;
   }
 
   function getSign(uid) {
@@ -53,7 +66,7 @@
 
   function saveSettings() {
     return new Promise(function(res, err) {
-      meta.settings.set('anon', settings, function(err, data) {        
+      meta.settings.set('anon', settings, function(err, data) {
         res();
       });
     });
@@ -68,14 +81,14 @@
     });
   }
 
-  function saveBlackList() {
-
+  function loadBanList() {
+    return new Promise(function(res, err) {
+      meta.settings.get('anon-banlist', function(err, data) {
+        banList = data;
+        res();
+      });
+    });
   }
-
-  function loadBlackList() {
-
-  }
-
 
   module.exports = anon;
 }(module));

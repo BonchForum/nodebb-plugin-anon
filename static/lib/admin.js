@@ -20,6 +20,10 @@ define('admin/plugins/anon', ['settings'], function(Settings) {
         });
       });
     });
+
+    $('#addBanList').on('click', function() {
+      
+    });
   };
 
   return ACP;

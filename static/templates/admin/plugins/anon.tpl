@@ -12,6 +12,12 @@
             <label for="appSecret">App salt</label>
             <input type="text" id="appSecret" name="appSecret" title="App Secret" class="form-control" placeholder="App Secret"><br />
           </div>
+          <div class="form-group">
+            <label for="accessCategory">Access category ID's</label>
+            <input type="text" id="accessCategory" name="accessCategory" title="Access categories" class="form-control" placeholder="1, 2, 3, 4, 5"><br />
+          </div>
+        </form>
+        <form role="form" class="anon-black">
         </form>
       </div>
     </div>
