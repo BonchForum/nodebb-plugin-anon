@@ -17,6 +17,16 @@
     router.get('/admin/plugins/anon', hostMiddleware.admin.buildHeader, render);
     router.get('/api/admin/plugins/anon', render);
 
+    loadSettings()
+      .then(function() {
+        winston.info('[nodebb-plugin-anon] Settings loaded');
+      });
+
+    loadBanList()
+      .then(function() {
+        winston.info('[nodebb-plugin-anon] Ban list loaded');
+      });
+
     callback();
   }
 
@@ -33,7 +43,7 @@
         data.uid = settings.uid;
       }
     }
-    
+
     return callback(null, data);
   }
 
