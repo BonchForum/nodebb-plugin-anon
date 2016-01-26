@@ -23,7 +23,23 @@ define('admin/plugins/anon', ['settings'], function(Settings) {
     });
 
     $('#addBanList').on('click', function() {
+      banList.push($('#banSignField').val())
+      $('#banSignField').val('');
 
+      socket.emit('admin.settings.set', {
+        hash: 'anon-banlist',
+        values: banList
+      }, function() {
+        app.alert({
+          type: 'success',
+          alert_id: 'anon-saved',
+          title: 'Sign add to ban',
+          message: 'Please reload your NodeBB to apply these settings',
+          clickfn: function() {
+            socket.emit('admin.reload');
+          }
+        });
+      });
     });
 
     socket.emit('admin.settings.get', {
