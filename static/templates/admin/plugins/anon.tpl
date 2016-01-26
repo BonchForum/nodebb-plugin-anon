@@ -17,8 +17,6 @@
             <input type="text" id="accessCategory" name="accessCategory" title="Access categories" class="form-control" placeholder="1, 2, 3, 4, 5"><br />
           </div>
         </form>
-        <hr>
-        <h1>Danger zone</h1>
         <form role="form" class="anon-addBanList">
           <div class="form-group">
             <label for="banSignField">Add sign to ban list</label>
