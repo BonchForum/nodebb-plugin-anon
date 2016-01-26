@@ -24,8 +24,8 @@
             <label for="banSignField">Add sign to ban list</label>
             <input type="text" id="banSignField" name="banSignField" title="Sign" class="form-control" placeholder="abcdef123456789qwerty"><br />
           </div>
-          <button id="addBanList" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Add</button>
         </form>
+          <button id="addBanList" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Add</button>
       </div>
     </div>
   </div>
