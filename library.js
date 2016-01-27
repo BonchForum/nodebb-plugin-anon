@@ -21,7 +21,7 @@
       loadSettings()
         .then(function() {
           if (settings.timeToClearPublishedList) {
-            setInterval(clearAlredyPublishedList, settings.timeToClearPublishedList);
+            setInterval(clearAlredyPublishedList, settings.timeToClearPublishedList * 36e5);
           }
           winston.info('[nodebb-plugin-anon] Settings loaded');
         });
