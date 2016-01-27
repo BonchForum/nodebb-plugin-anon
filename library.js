@@ -35,7 +35,7 @@
       if (regexPhrase.test(data.content)) {
         var sign = getSign(data.uid.toString());
 
-        if (existInBanList(sign) && hasAccessCategory(data.cid)) {
+        if (!existInBanList(sign) || !hasAccessCategory(data.cid)) {
           return callback(new Error('[[error:no-privileges]]'))
         }
 
@@ -58,7 +58,7 @@
   }
 
   function hasAccessCategory(cid) {
-    console.log(settings.accessCategory);
+    console.log(typeof settings.accessCategory);
 
     /* var accessArrayCategory = settings.accessCategory.splice(', ');
     return accessArrayCategory.indexOf(cid); */
