@@ -6,8 +6,8 @@
     alredyPublished = [],
     breakLine = '\r\n\r\n',
     signTitle = '###### sign: ',
-    crypto = require('crypto');
-  regexPhrase = /\[\[anon\]\]/i,
+    crypto = require('crypto'),
+    regexPhrase = /\[\[anon\]\]/i,
     meta = module.parent.require('./meta'),
     winston = module.parent.require('winston'),
 
