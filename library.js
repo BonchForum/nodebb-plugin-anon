@@ -58,8 +58,11 @@
   }
 
   function hasAccessCategory(cid) {
-    var accessArrayCategory = settings.accessCategory.splice(', ');
-    return accessArrayCategory.indexOf(cid);
+    console.log(settings.accessCategory);
+
+    /* var accessArrayCategory = settings.accessCategory.splice(', ');
+    return accessArrayCategory.indexOf(cid); */
+    return false;
   }
 
   function existInBanList(sign) {
