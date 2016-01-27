@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-anon",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Post anonimly posts from users",
   "main": "library.js",
   "scripts": {
