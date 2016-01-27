@@ -16,6 +16,10 @@
             <label for="accessCategory">Access category ID's</label>
             <input type="text" id="accessCategory" name="accessCategory" title="Access categories" class="form-control" placeholder="1, 2, 3, 4, 5"><br />
           </div>
+          <div class="form-group">
+            <label for="timeToClearPublishedList">Time, when to can again make posts</label>
+            <input type="text" id="timeToClearPublishedList" name="timeToClearPublishedList" title="Hours" class="form-control" placeholder="Hours"><br />
+          </div>
         </form>
         <form role="form" class="anon-addBanList">
           <div class="form-group">

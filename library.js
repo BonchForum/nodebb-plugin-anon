@@ -7,38 +7,43 @@
     breakLine = '\r\n\r\n',
     signTitle = '###### sign: ',
     crypto = require('crypto');
-    regexPhrase = /\[\[anon\]\]/i,
+  regexPhrase = /\[\[anon\]\]/i,
     meta = module.parent.require('./meta'),
     winston = module.parent.require('winston'),
 
-  anon.init = function(params, callback) {
-    var router = params.router,
-      hostMiddleware = params.middleware;
+    anon.init = function(params, callback) {
+      var router = params.router,
+        hostMiddleware = params.middleware;
 
-    router.get('/admin/plugins/anon', hostMiddleware.admin.buildHeader, render);
-    router.get('/api/admin/plugins/anon', render);
+      router.get('/admin/plugins/anon', hostMiddleware.admin.buildHeader, render);
+      router.get('/api/admin/plugins/anon', render);
 
-    loadSettings()
-      .then(function() {
-        winston.info('[nodebb-plugin-anon] Settings loaded');
-      });
+      loadSettings()
+        .then(function() {
+          if (settings.timeToClearPublishedList) {
+            setInterval(clearAlredyPublishedList, settings.timeToClearPublishedList);
+          }
+          winston.info('[nodebb-plugin-anon] Settings loaded');
+        });
 
-    loadBanList()
-      .then(function() {
-        winston.info('[nodebb-plugin-anon] Ban list loaded');
-      });
+      loadBanList()
+        .then(function() {
+          winston.info('[nodebb-plugin-anon] Ban list loaded');
+        });
 
-    callback();
-  }
+      callback();
+    }
 
   anon.filter = function(data, callback) {
     if (settings != null) {
       if (regexPhrase.test(data.content)) {
         var sign = getSign(data.uid.toString());
 
-        if (!existInBanList(sign) || !hasAccessCategory(data.cid)) {
+        if (!existInBanList(sign) || !hasAccessCategory(data.cid) || isAlredyPublish(sign)) {
           return callback(new Error('[[error:no-privileges]]'))
         }
+
+        alredyPublished.push(sign);
 
         data.content = data.content.replace(regexPhrase, '') + breakLine + signTitle + sign;
         data.uid = settings.uid;
@@ -58,9 +63,17 @@
     callback(null, header);
   }
 
+  function clearAlredyPublishedList() {
+    alredyPublished = [];
+  }
+
+  function isAlredyPublish(sign) {
+    return alredyPublished.indexOf(sign) !== -1;
+  }
+
   function hasAccessCategory(cid) {
     var accessArrayCategory = settings.accessCategory.split(', ');
-    return accessArrayCategory.indexOf(cid.toString()) !== -1; 
+    return accessArrayCategory.indexOf(cid.toString()) !== -1;
   }
 
   function existInBanList(sign) {
