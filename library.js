@@ -3,12 +3,13 @@
   var anon = {},
     settings = {},
     banList = [],
-    regexPhrase = /\[\[ANON\]\]/,
+    alredyPublished = [],
     breakLine = '\r\n\r\n',
     signTitle = '###### sign: ',
-    winston = module.parent.require('winston'),
-    meta = module.parent.require('./meta'),
     crypto = require('crypto');
+    regexPhrase = /\[\[anon\]\]/i,
+    meta = module.parent.require('./meta'),
+    winston = module.parent.require('winston'),
 
   anon.init = function(params, callback) {
     var router = params.router,
