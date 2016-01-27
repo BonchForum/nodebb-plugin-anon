@@ -9,7 +9,7 @@
     crypto = require('crypto'),
     regexPhrase = /\[\[anon\]\]/i,
     meta = module.parent.require('./meta'),
-    winston = module.parent.require('winston'),
+    winston = module.parent.require('winston');
 
     anon.init = function(params, callback) {
       var router = params.router,
